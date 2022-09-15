@@ -1,0 +1,47 @@
+{
+    "books":[
+        {
+            "id": 1,
+            "name": "Yaban",
+            "author": "Yakup Kadri Karaosmanoğlu",
+            "isbn": "1111111111111",
+            "categoryId":1
+        },
+        
+        {
+            "id": 2,
+            "name": "sefiller",
+            "author": "Yakup Kadri Karaosmanoğlu",
+            "isbn": "1111111111112",
+            "categoryId":2
+        },
+        {
+            "id": 3,
+            "name": "Denemeler",
+            "author": "Motaigne",
+            "isbn": "1111111111113",
+            "categoryId":3
+        }
+    ],
+  
+  
+    "categories":[
+        {
+            "id":1,
+            "name":"Roman"
+            
+
+            
+        },
+        {
+            "id":2,
+            "name":"Hikaye"
+        },
+
+        {
+            "id":3,
+            "name":"Deneme"
+        }
+
+    ]
+}
