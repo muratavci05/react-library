@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import axios, { Axios } from "axios";
+import Loading from "./Loading";
 
 
 
@@ -17,7 +18,10 @@ const ListBooks=(props)=>{
             axios
             .get("http://localhost:3004/categories")
             .then((resCat) => {
-                setCategories(resCat.data);
+                setTimeout(() =>{
+                    setCategories(resCat.data);
+                }, 1000);
+                
             })
             .catch((err) => console.log("categories err", err));
         })
@@ -25,10 +29,8 @@ const ListBooks=(props)=>{
 
     },[]);
     if (books === null || categories === null) {
-        return(
-            <div>
-                <h1>Loading...</h1>
-            </div>
+        return (
+            <div><Loading /></div>
         );
     }
 
@@ -60,7 +62,7 @@ const ListBooks=(props)=>{
                     <tr>
                         <td>{book.name}</td>
                         <td>{book.author}</td>
-                        <td>{category?.name}</td>
+                        <td>{category.name}</td>
                         <td>{book.isbn}</td>
                     </tr>
                 );
