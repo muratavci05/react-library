@@ -1,24 +1,27 @@
 import React from "react";
-import Header from "./components/Header";
-import ListBooks from "./components/ListBooks";
-import Loading from "./components/Loading";
+import Home from "./pages/Home";
+import {
+  BrowserRouter,  //sayfalama ile genel yetenekleri sağlıyor
+  Routes,         //içerisine routerları (yolları) yazmamızı sağlıyor
+  Route,          //hangi grupta hangi component render olacak şeklinde sistem sağlıyor
+} from "react-router-dom";
+
+import AddBook from "./pages/AddBook";
+import AddBookForm from "./components/AddBookForm";
+
 
 
 
 
 function App() {
   return (
-    <div>
-      <Header/>
-      <ListBooks/>
-      
-
-
-
-
-
-
-    </div>
+    <BrowserRouter>
+      <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/add-book" element={<AddBook />}/>
+          <Route path="/AddBookform" element={<AddBookForm/>}/>
+      </Routes>
+  </BrowserRouter>
   );
 }
 
