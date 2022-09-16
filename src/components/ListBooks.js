@@ -21,7 +21,7 @@ const ListBooks=(props)=>{
             .then((resCat) => {
                 setTimeout(() =>{
                     setCategories(resCat.data);
-                }, 1000);
+                }, 300);
                 
             })
             .catch((err) => console.log("categories err", err));
@@ -70,7 +70,7 @@ const ListBooks=(props)=>{
                     <tr>
                         <td>{book.name}</td>
                         <td>{book.author}</td>
-                        <td>{category.name}</td>
+                        <td>{category?.name}</td>
                         <td>{book.isbn}</td>
                     </tr>
                 );

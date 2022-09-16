@@ -1,9 +1,12 @@
 import React,{useEffect,useState} from "react";
 import axios from "axios";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
+
 
 
 const AddBookForm =(props)=>{
+    const navigate = useNavigate();
     const [categories,setCategories]=useState(null);
     const [bookname,setBookname]=useState("");
     const [author,setAuthor]=useState("");
@@ -33,11 +36,22 @@ const AddBookForm =(props)=>{
             name: bookname,
             author: author,
             isbn: isbn,
-            category: category
-        }
-        console.log(newBook);
-
-    }
+            categoryId: category,
+            
+        };
+        axios
+        .post("http://localhost:3004/books", newBook)
+        .then((res)=>{
+            console.log(res);
+            
+        setBookname("");
+        setAuthor("");
+        setIsbn("");
+        setCategory("");
+        navigate("/");
+        })
+        .catch((err)=>console.log(err));
+    };
 
     if (categories === null ) {
         return <Loading />
@@ -46,7 +60,7 @@ const AddBookForm =(props)=>{
 
     return(
        //form & kaydet 
-       <div classNameName="container my-5">
+       <div className="container my-5">
             <form onSubmit={handleSubmit} className="container my-5">
             <div className="row">
                 <div className="col">
@@ -79,10 +93,8 @@ const AddBookForm =(props)=>{
                         />
                     </div>
                     
-                     <div className="col">
-                        
-                        <select 
-                        class="form-select"
+                     <div className="col" >                        
+                        <select className="form-select"
                         value={category}
                         onChange={(event)=>setCategory(event.target.value)}> 
                         <option value={""} selected>Kategori Seçiniz</option>           
