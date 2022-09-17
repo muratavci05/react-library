@@ -8,6 +8,7 @@ import {
 
 import AddBook from "./pages/AddBook";
 import AddBookForm from "./components/AddBookForm";
+import EditBook from "./pages/EditBook";
 
 
 
@@ -17,9 +18,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/add-book" element={<AddBook />}/>
-          <Route path="/AddBookform" element={<AddBookForm/>}/>
+          <Route path="/" element={<Home/>} />
+          <Route path="/add-book" element={<AddBook />} />
+          <Route path="/edit-book/:bookId" element={<EditBook />} />
+          <Route path="/AddBookform" element={<AddBookForm />} />
       </Routes>
   </BrowserRouter>
   );

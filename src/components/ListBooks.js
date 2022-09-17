@@ -90,7 +90,10 @@ const ListBooks=(props)=>{
                             <div className="btn-group" role="group" >
                             <button type="button" 
                             className="btn btn-outline btn-danger btn-sm" 
-                            onClick={()=>deleteBook(book.id)}>Delete</button>
+                            onClick={()=>deleteBook(book.id)}>
+                        Delete</button>
+                        <Link to={`edit-book/${book.id}`} 
+                        className="btn btn-sm btn-outline-secondary">Edit</Link>
                             
                             </div>
                         </td>
