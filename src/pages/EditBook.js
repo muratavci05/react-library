@@ -108,10 +108,14 @@ if (categories === null){
                         <select className="form-select"
                         value={category}
                         onChange={(event)=>setCategory(event.target.value)}> 
-                        <option value={""} selected>Kategori Seçiniz</option>           
-                        {
-                            categories.map((cat) => {
-                                return <option value={cat.id}>{cat.name}</option>
+                        <option value={""} selected>Kategori Seçiniz</option>    
+
+                        {categories.map((cat) => {
+                                return (<option key={cat.id} value={cat.id}>
+                                    {cat.name}
+                                
+                                </option>
+                                );
                             })}
                         </select>
                     </div>

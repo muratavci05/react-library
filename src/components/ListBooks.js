@@ -3,12 +3,18 @@ import axios, { Axios } from "axios";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 
+import Modal from "./Modal";
+import { getByTitle } from "@testing-library/react";
+
 
 
 const ListBooks=(props)=>{
     const [books,setBooks]=useState(null);
     const [categories,setCategories]=useState(null);
-    const [didUpdate,setDidUpdate]=useState(false)
+    const [didUpdate,setDidUpdate]=useState(false);
+    const[showModal,setShowModal]=useState(false);  //başlangıç olarak modal gözükmesin diye 
+    const [bookToBeDelete,setBookToBeDelete]=useState(null);  //silinecek kitabı tutan state
+
 
     useEffect(()=>{
         axios
@@ -16,6 +22,7 @@ const ListBooks=(props)=>{
         .then((resBook) => {
             console.log(resBook);
             setBooks(resBook.data);
+            setShowModal(false); //modal işlemi confirm olunca kendiliğinden kapatmak için
             
             axios
             .get("http://localhost:3004/categories")
@@ -81,7 +88,7 @@ const ListBooks=(props)=>{
            cat.id === book.categoryId);
            
                 return(
-                    <tr>
+                    <tr key={book.id}>
                         <td>{book.name}</td>
                         <td>{book.author}</td>
                         <td>{category?.name}</td>
@@ -90,10 +97,16 @@ const ListBooks=(props)=>{
                             <div className="btn-group" role="group" >
                             <button type="button" 
                             className="btn btn-outline btn-danger btn-sm" 
-                            onClick={()=>deleteBook(book.id)}>
+                            onClick={()=>{
+                                setShowModal(true);  //modal kuralı.."buradaki modal'ı göster"
+                                setBookToBeDelete(book.id) // hangi kitabı silecek, id si belli olan
+                                //deleteBook(book.id)
+                            }}>
                         Delete</button>
+
                         <Link to={`edit-book/${book.id}`} 
-                        className="btn btn-sm btn-outline-secondary">Edit</Link>
+                        className="btn btn-sm btn-outline-secondary">
+                            Edit</Link>
                             
                             </div>
                         </td>
@@ -102,8 +115,21 @@ const ListBooks=(props)=>{
             })}
   </tbody>
 </table>
+
+{
+    showModal === true && (
+    
+    <Modal 
+    aciklama="Are you sure you want to delete?"
+    getByTitle={"Deletion Process"}
+    workToBeDone={()=>
+    deleteBook(bookToBeDelete)} 
+    setShowModal= {setShowModal}/>  //modal if yapısı
+)}
+
+
 </div>
-    )
+    );
 };
 
 export default ListBooks;

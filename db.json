@@ -1,13 +1,6 @@
 {
   "books": [
     {
-      "name": "Yaban",
-      "author": "Yakup Kadri Karaosmanoğlu",
-      "categoryId": "1",
-      "isbn": "1111111111111",
-      "id": 1
-    },
-    {
       "id": 2,
       "name": "sefiller",
       "author": "Yakup Kadri Karaosmanoğlu",
