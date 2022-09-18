@@ -122,9 +122,8 @@ const ListBooks=(props)=>{
     <Modal 
     aciklama="Are you sure you want to delete?"
     getByTitle={"Deletion Process"}
-    workToBeDone={()=>
-    deleteBook(bookToBeDelete)} 
-    setShowModal= {setShowModal}/>  //modal if yapısı
+    onConfirm={()=>deleteBook(bookToBeDelete)} 
+    onCancel= {()=> setShowModal(false)}/>  //modal if yapısı
 )}
 
 

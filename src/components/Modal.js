@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 
 const Modal = (props)=>{
-    const {setShowModal,workToBeDone,title,aciklama}=props
+    const {onCancel,onConfirm,title,aciklama}=props
 
     return(
         <div style={{
@@ -25,11 +25,11 @@ const Modal = (props)=>{
                     <h1 className="text-center">{title} </h1>
 
                     <p>{aciklama}</p>
-                    
+
                     <div className="d-flex justify-content-center">
-                        <button onClick={()=>setShowModal(false)} 
+                        <button onClick={onCancel} 
                         className="btn btn-sm btn-outline-danger mx-3">Close</button>
-                        <button onClick={workToBeDone} //tanımlanan fonksiyon workToBeDone
+                        <button onClick={onConfirm} //tanımlanan fonksiyon workToBeDone
                         className="btn btn-sm btn-outline-primary">Confirm</button>
                     </div>
                 </div>
