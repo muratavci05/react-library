@@ -4,7 +4,6 @@ import Loading from "./Loading";
 import { Link } from "react-router-dom";
 
 import Modal from "./Modal";
-import { getByTitle } from "@testing-library/react";
 
 
 
@@ -12,9 +11,9 @@ const ListBooks=(props)=>{
     const [books,setBooks]=useState(null);
     const [categories,setCategories]=useState(null);
     const [didUpdate,setDidUpdate]=useState(false);
-    const[showModal,setShowModal]=useState(false);  //başlangıç olarak modal gözükmesin diye 
+    const [showModal,setShowModal]=useState(false);  //başlangıç olarak modal gözükmesin diye 
     const [bookToBeDelete,setBookToBeDelete]=useState(null);  //silinecek kitabı tutan state
-
+    const [deleteBookName,setDeleteBookName]=useState("");
 
     useEffect(()=>{
         axios
@@ -101,6 +100,7 @@ const ListBooks=(props)=>{
                                 setShowModal(true);  //modal kuralı.."buradaki modal'ı göster"
                                 setBookToBeDelete(book.id) // hangi kitabı silecek, id si belli olan
                                 //deleteBook(book.id)
+                                setDeleteBookName(book.name); //modal da silinecek kitap ismi çıkması için
                             }}>
                         Delete</button>
 
@@ -120,10 +120,12 @@ const ListBooks=(props)=>{
     showModal === true && (
     
     <Modal 
+    //aciklama={`${deleteBookName} "- Are you sure you want to delete?"`} 
     aciklama="Are you sure you want to delete?"
-    getByTitle={"Deletion Process"}
+    title={deleteBookName}
+    //title={"Deletion Process"}
     onConfirm={()=>deleteBook(bookToBeDelete)} 
-    onCancel= {()=> setShowModal(false)}/>  //modal if yapısı
+    onCancel= {()=> setShowModal(false)}/>  // generic bir modal..istenilen yerde kullanılabilir
 )}
 
 

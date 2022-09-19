@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../components/Loading";
+import Modal from "../components/Modal";
 
 const EditBook = (props)=> {
     const params = useParams();
@@ -16,6 +17,7 @@ const [author,setAuthor]=useState("");
 const [isbn,setIsbn]=useState("");
 const [category,setCategory]=useState("");
 const [categories,setCategories]=useState(null);
+const [showModal,setShowModal]=useState(false);
 
 
     useEffect(()=>{
@@ -42,8 +44,18 @@ const [categories,setCategories]=useState(null);
 
 const handleSubmit=(event)=>{
     event.preventDefault();
+    setShowModal(true); //modal aç demek 
+    
+
+};
+
+
+//handdlesubmite bu modal işlemi show etmek ve kayıt işlemi başlangıç
+
+const editBook=()=>{
+
     if (bookname === "" || author === "" || category === ""){
-        alert("itap Adı, Kitap Yazarı ve Kategori alanları boş bırakılamaz")
+        alert("Kitap Adı, Kitap Yazarı ve Kategori alanları boş bırakılamaz")
         return;
     }
 const updateBook={
@@ -58,11 +70,13 @@ axios
 .put(`http://localhost:3004/books/${params.bookId}`,updateBook)
 .then((res)=>{
     console.log(res);
-    navigate("/");
+    setShowModal(false);  //anasayfaya yönlendirme işlemi öncesi modal kapanması için
+    navigate("/");  //anasayfaya yönlendirme işlemi
 })
 .catch((err)=>console.log("edit err", err));
+}
 
-};
+//show ve kayıt işlemi bitiş
 
 if (categories === null){
     return <Loading />;
@@ -72,7 +86,7 @@ if (categories === null){
         <div>
             <Header/>
             <div className="container my-5">
-            <form onSubmit={handleSubmit} className="container my-5">
+            <form onSubmit={handleSubmit} className="container my-5"> 
             <div className="row">
                 <div className="col">
                     <input 
@@ -135,7 +149,17 @@ if (categories === null){
                
             </form>
         </div>
-
+        
+            { 
+                showModal === true && (                //edit kısmının modal eklenmesi işlemi
+                    <Modal 
+                    title="Book Update"
+                    aciklama={`${bookname} "Confirm to update your book"`}
+                    //aciklama="Kaydetmek için onaylayın"
+                    onCancel={()=>setShowModal(false)}  //iptal et derse buraya gelecek
+                    onConfirm={()=>editBook()}/> //confirm'e tıklayında onaylayıp anasayfaya yönlendirme bu fonksiyon çalışsın 
+                )
+            }
 
         </div>
     );

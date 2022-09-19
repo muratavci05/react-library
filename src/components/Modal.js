@@ -1,10 +1,11 @@
-import React,{useState} from "react";
+import React from "react";
 
 const Modal = (props)=>{
     const {onCancel,onConfirm,title,aciklama}=props
 
     return(
-        <div style={{
+        <button onClick={onCancel} //onclick kısmı sadece modal ekrana tıkladığında kaybolsun diye eklendi
+        style={{
             position:"absolute",
             top: 0,
             left: 0,
@@ -14,6 +15,7 @@ const Modal = (props)=>{
             display:"flex",
             justifyContent:"center",
             alignItems:"center",
+            cursor: "default",  //ana kapsayıcı div den buttona çevirince ekrandaki cursoru default yaptık, onclick işleminin devamına ait
             }}>
                  <div style={{
                     width: "50%",
@@ -24,7 +26,7 @@ const Modal = (props)=>{
                     }}> 
                     <h1 className="text-center">{title} </h1>
 
-                    <p>{aciklama}</p>
+                    <p className="text-center">{aciklama}</p>
 
                     <div className="d-flex justify-content-center">
                         <button onClick={onCancel} 
@@ -33,7 +35,7 @@ const Modal = (props)=>{
                         className="btn btn-sm btn-outline-primary">Confirm</button>
                     </div>
                 </div>
-            </div>
+            </button> // dilersen button kısmını div de yapabilirsin, onclick ve cursoru: defaultu kaldır
         
 
     );
