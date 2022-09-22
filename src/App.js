@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./pages/Home";
 import {
   BrowserRouter,  //sayfalama ile genel yetenekleri sağlıyor
@@ -10,12 +10,41 @@ import AddBook from "./pages/AddBook";
 import AddBookForm from "./components/AddBookForm";
 import EditBook from "./pages/EditBook";
 
-
-
-
+import {useDispatch} from "react-redux";   // 1.aşama react-redux fonksiyonu import ediyoruz 
+import axios from "axios";
 
 function App() {
-  return (
+
+  // categoriesReducer e ait dispatch kısmı başlangıç
+  const dispatch = useDispatch();
+  useEffect(()=>{ 
+    dispatch({
+          type:"FETCH_CATEGORIES_START"});
+    axios
+      .get("http://localhost:3004/categories")
+      .then((res)=>{
+        dispatch({ 
+          type: "FETCH_CATEGORIES_SUCCESS",payload: res.data});
+      })
+      .catch((err)=>{
+        dispatch({
+          type: "FETCH_CATEGORIES_FAIL",
+          payload: "Kategorileri çekerken bir hata oluştu",
+        });
+       
+      });
+  },[]);
+
+  // categoriesReducer'e ait dispatch kısmı bitiş
+//yukarının özeti:
+//categorileri dispatch ediyoruz.
+//axios'tan categorileri çekiyor dataları istiyoruz.
+//eğer datalar gelirse then kısmı çalışıyor...
+// dataların gelmesinde problem var ise catch kısmı çalışıyor dispatch error mesaj kısmı devreye giriyor.
+// veri çekme işlemi çekilmiştir.useSelector (listBooks.js de gibi) ile kategorilerin hep güncel halini kullanacağım.
+
+
+ return(
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<Home/>} />
@@ -25,6 +54,6 @@ function App() {
       </Routes>
   </BrowserRouter>
   );
-}
+};
 
 export default App;

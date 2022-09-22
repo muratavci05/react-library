@@ -1,11 +1,11 @@
 {
   "books": [
     {
-      "id": 2,
-      "name": "sefiller",
+      "name": "sefilleri",
       "author": "Yakup Kadri Karaosmanoğlu",
+      "categoryId": "2",
       "isbn": "1111111111112",
-      "categoryId": "2"
+      "id": 2
     },
     {
       "id": 1663784298113,
@@ -48,20 +48,6 @@
       "author": "yhgtyh",
       "isbn": "",
       "categoryId": "2"
-    },
-    {
-      "id": 1663785294480,
-      "name": "ıkju",
-      "author": "lo",
-      "isbn": "",
-      "categoryId": "1"
-    },
-    {
-      "id": 1663785303696,
-      "name": "vf",
-      "author": "uuhh",
-      "isbn": "",
-      "categoryId": "3"
     }
   ],
   "categories": [

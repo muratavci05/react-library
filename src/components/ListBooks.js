@@ -5,9 +5,15 @@ import { Link } from "react-router-dom";
 
 import Modal from "./Modal";
 
+import {useSelector} from "react-redux"; //çok önemli subscrip olmaya yarıyor
 
 
 const ListBooks=(props)=>{
+
+    
+    const {categoriesState}= useSelector((state)=> state);  //useSelector ile kategorilerin güncel hali kullanılır
+    console.log (categoriesState);
+
     const [books,setBooks]=useState(null);
     const [categories,setCategories]=useState(null);
     const [didUpdate,setDidUpdate]=useState(false);
