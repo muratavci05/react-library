@@ -3,15 +3,18 @@ import axios from "axios";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 
-import { useSelector } from "react-redux";   //to be subscribe 
+import { useSelector,useDispatch } from "react-redux";   //to be subscribe 
 
 
 
 
 
 const AddBookForm =(props)=>{
+    const dispatch=useDispatch();
     const {categoriesState}= useSelector((state)=>state);   //useSelector atama yaptık
     console.log(categoriesState);
+
+    
 
     const navigate = useNavigate();
     //const [categories,setCategories]=useState(null);
@@ -49,8 +52,9 @@ const AddBookForm =(props)=>{
         axios
         .post("http://localhost:3004/books", newBook) 
         .then((res)=>{
-            console.log(res);
-            
+            console.log("kitap ekle res", res);
+
+        dispatch({ type: "ADD_BOOK",payload: newBook });    
         setBookname("");
         setAuthor("");
         setIsbn("");

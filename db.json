@@ -15,18 +15,25 @@
       "categoryId": "2"
     },
     {
-      "name": "frontend developer 1",
-      "author": "murat avcı",
-      "categoryId": "3",
-      "isbn": "",
-      "id": 1663784324769
-    },
-    {
-      "id": 1663785254876,
-      "name": "ggg",
-      "author": "yuyt",
+      "id": 1664201612819,
+      "name": "9. hariciye koğuşu",
+      "author": "yazar",
       "isbn": "",
       "categoryId": "1"
+    },
+    {
+      "id": 1664202438155,
+      "name": "deneme1",
+      "author": "yazar1",
+      "isbn": "",
+      "categoryId": "1"
+    },
+    {
+      "id": 1664204840629,
+      "name": "newbook",
+      "author": "new",
+      "isbn": "",
+      "categoryId": "3"
     }
   ],
   "categories": [

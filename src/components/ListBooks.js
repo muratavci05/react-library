@@ -15,7 +15,7 @@ const ListBooks=(props)=>{
     console.log (categoriesState);
     console.log (booksState)
 
-    const [books,setBooks]=useState(null);
+    //const [books,setBooks]=useState(null);
     //const [categories,setCategories]=useState(null);
     const [didUpdate,setDidUpdate]=useState(false);
     const [showModal,setShowModal]=useState(false);  //başlangıç olarak modal gözükmesin diye 
@@ -23,14 +23,14 @@ const ListBooks=(props)=>{
     const [deleteBookName,setDeleteBookName]=useState("");
 
     useEffect(()=>{
-        axios
+/*        axios
         .get("http://localhost:3004/books")
         .then((resBook) => {
             console.log(resBook);
             setBooks(resBook.data);
             setShowModal(false); //modal işlemi confirm olunca kendiliğinden kapatmak için
             
-            /* axios
+            axios
             .get("http://localhost:3004/categories")
             .then((resCat) => {
                 setTimeout(() =>{
@@ -38,10 +38,10 @@ const ListBooks=(props)=>{
                 }, 300);
                 
             })
-            .catch((err) => console.log("categories err", err)); */
+            .catch((err) => console.log("categories err", err)); 
         })
         .catch((err)=> console.log("books err", err));
-
+ */
     },[didUpdate]);
 
     const deleteBook=(id)=>{
@@ -55,7 +55,7 @@ const ListBooks=(props)=>{
     };
 
 
-    if (books === null || categoriesState.success !== true) {
+    if (booksState.success !== true || categoriesState.success !== true) {
         return (
             <div><Loading /></div>
         );
@@ -88,7 +88,7 @@ const ListBooks=(props)=>{
   
   <tbody>
         
-        {books.map((book) => {
+        {booksState.books.map((book) => {
            const category = categoriesState.categories.find(
             (cat) =>
            cat.id === book.categoryId);
