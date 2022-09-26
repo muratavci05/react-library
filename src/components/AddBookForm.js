@@ -3,17 +3,24 @@ import axios from "axios";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 
+import { useSelector } from "react-redux";   //to be subscribe 
+
+
+
 
 
 const AddBookForm =(props)=>{
+    const {categoriesState}= useSelector((state)=>state);   //useSelector atama yaptık
+    console.log(categoriesState);
+
     const navigate = useNavigate();
-    const [categories,setCategories]=useState(null);
+    //const [categories,setCategories]=useState(null);
     const [bookname,setBookname]=useState("");
     const [author,setAuthor]=useState("");
     const [isbn,setIsbn]=useState("");
     const [category,setCategory]=useState("");
     
-    useEffect(()=>{
+    /* useEffect(()=>{
         axios
         .get("http://localhost:3004/categories")
         .then((res) => {
@@ -23,7 +30,7 @@ const AddBookForm =(props)=>{
         .catch((err) => console.log(err));
 
 
-    },[]);
+    },[]); */
 
     const handleSubmit=(event)=>{
         event.preventDefault();
@@ -53,7 +60,7 @@ const AddBookForm =(props)=>{
         .catch((err)=>console.log(err));
     };
 
-    if (categories === null ) {
+    if (categoriesState.success !== true ) {
         return <Loading />
     }
 
@@ -99,7 +106,7 @@ const AddBookForm =(props)=>{
                         onChange={(event)=>setCategory(event.target.value)}> 
                         <option value={""} selected>Kategori Seçiniz</option>           
                         {
-                            categories.map((cat) => {
+                            categoriesState.categories.map((cat) => {
                                 return <option 
                                 key={cat.id} 
                                 value={cat.id}>

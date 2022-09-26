@@ -18,21 +18,41 @@ function App() {
   // categoriesReducer e ait dispatch kısmı başlangıç
   const dispatch = useDispatch();
   useEffect(()=>{ 
+
+    //categories
     dispatch({
           type:"FETCH_CATEGORIES_START"});
     axios
       .get("http://localhost:3004/categories")
       .then((res)=>{
         dispatch({ 
-          type: "FETCH_CATEGORIES_SUCCESS",payload: res.data});
+          type: "FETCH_CATEGORIES_SUCCESS",
+          payload: res.data});
       })
-      .catch((err)=>{
+      .catch ((err)=>{
         dispatch({
           type: "FETCH_CATEGORIES_FAIL",
-          payload: "Kategorileri çekerken bir hata oluştu",
+          payload: "Kategorileri cekerken bir hata olustu",
         });
        
       });
+      //books
+      dispatch({
+        type: "FETCH_BOOKS_START"});
+      axios
+        .get("http://localhost:3004/books")
+        .then ((res)=>{
+          dispatch({
+            type:"FETCH_BOOKS_SUCCESS", 
+            payload: res.data});
+        })
+        .catch((err)=>{
+          dispatch ({
+            type: "FETCH_BOOKS_FAIL", 
+            payload: "Kitapları Çekerken Bir Hata Oluştu",
+          })
+        });
+
   },[]);
 
   // categoriesReducer'e ait dispatch kısmı bitiş
@@ -44,7 +64,7 @@ function App() {
 // veri çekme işlemi çekilmiştir.useSelector (listBooks.js de gibi) ile kategorilerin hep güncel halini kullanacağım.
 
 
- return(
+return(
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<Home/>} />
@@ -55,5 +75,5 @@ function App() {
   </BrowserRouter>
   );
 };
-
+ 
 export default App;

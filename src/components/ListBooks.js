@@ -11,11 +11,12 @@ import {useSelector} from "react-redux"; //çok önemli subscrip olmaya yarıyor
 const ListBooks=(props)=>{
 
     
-    const {categoriesState}= useSelector((state)=> state);  //useSelector ile kategorilerin güncel hali kullanılır
+    const {categoriesState,booksState}= useSelector((state)=> state);  //useSelector ile kategorilerin güncel hali kullanılır (subscribe işlemi)
     console.log (categoriesState);
+    console.log (booksState)
 
     const [books,setBooks]=useState(null);
-    const [categories,setCategories]=useState(null);
+    //const [categories,setCategories]=useState(null);
     const [didUpdate,setDidUpdate]=useState(false);
     const [showModal,setShowModal]=useState(false);  //başlangıç olarak modal gözükmesin diye 
     const [bookToBeDelete,setBookToBeDelete]=useState(null);  //silinecek kitabı tutan state
@@ -29,7 +30,7 @@ const ListBooks=(props)=>{
             setBooks(resBook.data);
             setShowModal(false); //modal işlemi confirm olunca kendiliğinden kapatmak için
             
-            axios
+            /* axios
             .get("http://localhost:3004/categories")
             .then((resCat) => {
                 setTimeout(() =>{
@@ -37,7 +38,7 @@ const ListBooks=(props)=>{
                 }, 300);
                 
             })
-            .catch((err) => console.log("categories err", err));
+            .catch((err) => console.log("categories err", err)); */
         })
         .catch((err)=> console.log("books err", err));
 
@@ -54,7 +55,7 @@ const ListBooks=(props)=>{
     };
 
 
-    if (books === null || categories === null) {
+    if (books === null || categoriesState.success !== true) {
         return (
             <div><Loading /></div>
         );
@@ -88,7 +89,7 @@ const ListBooks=(props)=>{
   <tbody>
         
         {books.map((book) => {
-           const category = categories.find(
+           const category = categoriesState.categories.find(
             (cat) =>
            cat.id === book.categoryId);
            

@@ -6,8 +6,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../components/Loading";
 import Modal from "../components/Modal";
+import { useSelector } from "react-redux";   //to be subscribe
+
+
+
 
 const EditBook = (props)=> {
+
+    const {categoriesState}=useSelector((state)=>state); 
+    console.log(categoriesState);    //to be subcribe
+
+
     const params = useParams();
     const navigate=useNavigate("");
     console.log("param", params);
@@ -16,7 +25,7 @@ const [bookname,setBookname]=useState();
 const [author,setAuthor]=useState("");
 const [isbn,setIsbn]=useState("");
 const [category,setCategory]=useState("");
-const [categories,setCategories]=useState(null);
+//const [categories,setCategories]=useState(null);
 const [showModal,setShowModal]=useState(false);
 
 
@@ -29,12 +38,12 @@ const [showModal,setShowModal]=useState(false);
             setAuthor(res.data.author);
             setIsbn(res.data.isbn);
             setCategory(res.data.categoryId);
-            axios
+           /*  axios
             .get("http://localhost:3004/categories")
             .then ((res) => {
                 setCategories(res.data);
             })
-            .catch((err) => console.log("categories err", err));
+            .catch((err) => console.log("categories err", err)); */
         })
         .catch(err=>console.log(err));
     },[]);
@@ -78,7 +87,7 @@ axios
 
 //show ve kayıt işlemi bitiş
 
-if (categories === null){
+if (categoriesState.success !== true){
     return <Loading />;
 }
 
@@ -124,7 +133,7 @@ if (categories === null){
                         onChange={(event)=>setCategory(event.target.value)}> 
                         <option value={""} selected>Kategori Seçiniz</option>    
 
-                        {categories.map((cat) => {
+                        {categoriesState.categories.map((cat) => {
                                 return (<option key={cat.id} value={cat.id}>
                                     {cat.name}
                                 

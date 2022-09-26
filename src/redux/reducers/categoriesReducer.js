@@ -43,11 +43,38 @@ const categoriesReducer = (state = initialState,action) =>{
 
         default:
         return state;
+    } 
+
+    // if ile de şu şekilde yazılır
+    // if yapısında çalışınca sırayla tek tek kontrol ederek ilerler bu nedenle daha fazla vakit kaybı ve yavaştır (switch case göre)
+
+    /* if (action.type === "FETCH_CATEGORIES_START"){
+        return {
+            ...state,
+            start: true,
+        };
     }
-    
+    if (action.type === "FETCH_CATEGORIES_SUCCESS"){
+        return{
+            ...state,
+            start: false,
+            success: true,
+            categories: action.payload,
+        };
+    }
+    if (action.type === "FETCH_CATEGORIES_FAIL"){
+        return{
+            ...state,
+            start: false,
+            fail: true,
+            errorMessage: action.payload,
+
+        };
+    }
+    return state;  */
 };
 
-export default categoriesReducer;
+
 
 //özet açıklama
 
@@ -57,3 +84,5 @@ export default categoriesReducer;
 // (sprint operatör)...state ile üstte initialState olarak tanımlanan state tamamını alacak
 //start:true olarak çekip değiştirecek...
 //gelen type gelen case lerden hiç birine uymuyor ise default:state ile..gelen staten kendine döndürecek
+
+export default categoriesReducer;
