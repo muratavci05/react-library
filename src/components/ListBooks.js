@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 
 import Modal from "./Modal";
 
-import {useSelector} from "react-redux"; //çok önemli subscrip olmaya yarıyor
+import {useSelector, useDispatch} from "react-redux"; //çok önemli subscrip olmaya yarıyor
+
 
 
 const ListBooks=(props)=>{
+    const dispatch= useDispatch();
 
     
     const {categoriesState,booksState}= useSelector((state)=> state);  //useSelector ile kategorilerin güncel hali kullanılır (subscribe işlemi)
@@ -49,7 +51,9 @@ const ListBooks=(props)=>{
         axios.delete(`http://localhost:3004/books/${id}`)
         .then((res) => {
             console.log("delete res", res);
+            dispatch({ type: "DELETE_BOOK",payload: id});
             setDidUpdate(!didUpdate);
+            setShowModal(false);
         })
         .catch((err) => console.log(err));
     };

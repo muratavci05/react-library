@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";   //to be subscribe
 
 const EditBook = (props)=> {
 
-    const {categoriesState}=useSelector((state)=>state); 
+    const {categoriesState,booksState}=useSelector((state)=>state); 
     console.log(categoriesState);    //to be subcribe
 
 
@@ -30,7 +30,14 @@ const [showModal,setShowModal]=useState(false);
 
 
     useEffect(()=>{
-        axios
+        const arananKitap = booksState.books.find((item) => item.id === params.kitapId);
+
+            setBookname(arananKitap.name);
+            setAuthor(arananKitap.author);
+            setIsbn(arananKitap.isbn);
+            setCategory(arananKitap.categoryId);
+
+        /* axios
         .get(`http://localhost:3004/books/${params.bookId}`)
         .then(res=>{
             console.log(res.data);
@@ -38,14 +45,14 @@ const [showModal,setShowModal]=useState(false);
             setAuthor(res.data.author);
             setIsbn(res.data.isbn);
             setCategory(res.data.categoryId);
-           /*  axios
+             axios
             .get("http://localhost:3004/categories")
             .then ((res) => {
                 setCategories(res.data);
             })
-            .catch((err) => console.log("categories err", err)); */
+            .catch((err) => console.log("categories err", err)); 
         })
-        .catch(err=>console.log(err));
+        .catch(err=>console.log(err)); */
     },[]);
 
   //update için boş bırakılamaz olan yerlerin uyarısı
@@ -87,7 +94,7 @@ axios
 
 //show ve kayıt işlemi bitiş
 
-if (categoriesState.success !== true){
+if (categoriesState.success !== true || booksState.success !== true){
     return <Loading />;
 }
 

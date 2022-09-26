@@ -20,20 +20,6 @@
       "author": "yazar",
       "isbn": "",
       "categoryId": "1"
-    },
-    {
-      "id": 1664202438155,
-      "name": "deneme1",
-      "author": "yazar1",
-      "isbn": "",
-      "categoryId": "1"
-    },
-    {
-      "id": 1664204840629,
-      "name": "newbook",
-      "author": "new",
-      "isbn": "",
-      "categoryId": "3"
     }
   ],
   "categories": [

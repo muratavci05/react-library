@@ -38,6 +38,17 @@ const booksReducer = (state=initialState,action)=>{
                 ...state,
                 books:[...state.books,action.payload],
             }; 
+        
+        case "DELETE_BOOK":
+            const filteredBooks=state.books.filter(item=>item.id !== action.payload)
+
+            return{
+                ...state,
+                books: filteredBooks
+            };
+
+        case "EDIT_BOOK":
+            
            
     
         default:
