@@ -6,22 +6,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../components/Loading";
 import Modal from "../components/Modal";
-import { useSelector } from "react-redux";   //to be subscribe
+import { useSelector,useDispatch } from "react-redux";   //to be subscribe
 
 
 
 
 const EditBook = (props)=> {
 
+    const dispatch = useDispatch();
+
     const {categoriesState,booksState}=useSelector((state)=>state); 
-    console.log(categoriesState);    //to be subcribe
-
-
+    console.log(booksState);    //to be subcribe
+    
     const params = useParams();
-    const navigate=useNavigate("");
+    const navigate=useNavigate();
     console.log("param", params);
 
-const [bookname,setBookname]=useState();
+const [bookname,setBookname]=useState("");
 const [author,setAuthor]=useState("");
 const [isbn,setIsbn]=useState("");
 const [category,setCategory]=useState("");
@@ -30,12 +31,21 @@ const [showModal,setShowModal]=useState(false);
 
 
     useEffect(()=>{
-        const arananKitap = booksState.books.find((item) => item.id === params.kitapId);
+        console.log(booksState.books, params.bookId);
+        const searchBook = booksState.books.find(
+            (item) => item.id == params.bookId);
 
-            setBookname(arananKitap.name);
-            setAuthor(arananKitap.author);
-            setIsbn(arananKitap.isbn);
-            setCategory(arananKitap.categoryId);
+            if (searchBook === undefined) {
+                navigate("/");
+                return;
+                
+            }
+
+            console.log(searchBook);
+            setBookname(searchBook.name);
+            setAuthor(searchBook.author);
+            setIsbn(searchBook.isbn);
+            setCategory(searchBook.categoryId);
 
         /* axios
         .get(`http://localhost:3004/books/${params.bookId}`)
@@ -53,6 +63,7 @@ const [showModal,setShowModal]=useState(false);
             .catch((err) => console.log("categories err", err)); 
         })
         .catch(err=>console.log(err)); */
+    document.title = `Library - Edit Library - ${searchBook.name}`;    
     },[]);
 
   //update için boş bırakılamaz olan yerlerin uyarısı
@@ -75,7 +86,7 @@ const editBook=()=>{
         return;
     }
 const updateBook={
-    id: params.kitapId,
+    id: Number(params.bookId),
     name: bookname,
     author: author,
     categoryId: category,
@@ -86,8 +97,12 @@ axios
 .put(`http://localhost:3004/books/${params.bookId}`,updateBook)
 .then((res)=>{
     console.log(res);
+    dispatch({type: "EDIT_BOOK", payload: updateBook});  //EDIT_BOOK isimli bir durum çalışsın, oraya "updateBook" bir parametre gönderdim, 
+                                                        //bu parametreyi statenin içinde ki kitaplardan çıkar güncel halini yerine yaz..
+    
     setShowModal(false);  //anasayfaya yönlendirme işlemi öncesi modal kapanması için
     navigate("/");  //anasayfaya yönlendirme işlemi
+    
 })
 .catch((err)=>console.log("edit err", err));
 }

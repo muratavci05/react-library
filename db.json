@@ -1,25 +1,32 @@
 {
   "books": [
     {
-      "name": "sefillerid",
-      "author": "Yakup Kadri Karaosmanoğlu",
+      "id": 2,
+      "name": "kitap 1",
+      "author": "yazar 2",
       "categoryId": "2",
-      "isbn": "1111111111112",
-      "id": 2
+      "isbn": "1111111111112"
     },
     {
       "id": 1663784298113,
       "name": "hayvanlar alemi",
       "author": "yabancı kitap",
-      "isbn": "",
-      "categoryId": "2"
+      "categoryId": "2",
+      "isbn": "090"
     },
     {
-      "id": 1664201612819,
-      "name": "9. hariciye koğuşu",
-      "author": "yazar",
-      "isbn": "",
-      "categoryId": "1"
+      "id": 1664282086690,
+      "name": "yeni kitap",
+      "author": "yazarım",
+      "categoryId": "1",
+      "isbn": "0000"
+    },
+    {
+      "id": 1664282263204,
+      "name": "yeni kitap",
+      "author": "autro",
+      "categoryId": "1",
+      "isbn": "9999999"
     }
   ],
   "categories": [

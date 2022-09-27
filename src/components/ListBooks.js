@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 
@@ -19,8 +19,8 @@ const ListBooks=(props)=>{
 
     //const [books,setBooks]=useState(null);
     //const [categories,setCategories]=useState(null);
-    const [didUpdate,setDidUpdate]=useState(false);
-    const [showModal,setShowModal]=useState(false);  //başlangıç olarak modal gözükmesin diye 
+    const [didUpdate,setDidUpdate] = useState(false);
+    const [showModal,setShowModal] = useState(false);  //başlangıç olarak modal gözükmesin diye 
     const [bookToBeDelete,setBookToBeDelete]=useState(null);  //silinecek kitabı tutan state
     const [deleteBookName,setDeleteBookName]=useState("");
 
@@ -48,10 +48,11 @@ const ListBooks=(props)=>{
 
     const deleteBook=(id)=>{
         console.log(`http://localhost:3004/books/${id}`);
-        axios.delete(`http://localhost:3004/books/${id}`)
+        axios
+        .delete(`http://localhost:3004/books/${id}`)
         .then((res) => {
             console.log("delete res", res);
-            dispatch({ type: "DELETE_BOOK",payload: id});
+            dispatch({ type: "DELETE_BOOK",payload:id});
             setDidUpdate(!didUpdate);
             setShowModal(false);
         })
