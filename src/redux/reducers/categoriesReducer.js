@@ -43,7 +43,7 @@ const categoriesReducer = (state = initialState,action) =>{
         case "ADD_CATEGORIES":
             return{
                 ...state,
-                categories:[...state.categories, action.payload];
+                categories:[...state.categories, action.payload]
 
             }
             
