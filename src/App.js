@@ -9,6 +9,7 @@ import {
 import AddBook from "./pages/AddBook";
 import AddBookForm from "./components/AddBookForm";
 import EditBook from "./pages/EditBook";
+import CategoriesList from "./pages/CategoriesList";
 
 import {useDispatch} from "react-redux";   // 1.aşama react-redux fonksiyonu import ediyoruz 
 import axios from "axios";
@@ -71,6 +72,7 @@ return(
           <Route path="/add-book" element={<AddBook />} />
           <Route path="/edit-book/:bookId" element={<EditBook />} />
           <Route path="/AddBookform" element={<AddBookForm />} />
+          <Route path="/categories" element={<CategoriesList />} />
       </Routes>
   </BrowserRouter>
   );

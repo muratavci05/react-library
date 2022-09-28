@@ -27,6 +27,10 @@ const Header = (props)=> {
                 <Link className="nav-link" to="/"
                 >Kitaplar</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/categories"
+                >Kategoriler</Link>
+              </li>
               
              
              

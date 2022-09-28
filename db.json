@@ -27,6 +27,13 @@
       "author": "autro",
       "categoryId": "1",
       "isbn": "9999999"
+    },
+    {
+      "id": 1664344664545,
+      "name": "r",
+      "author": "de",
+      "categoryId": "2",
+      "isbn": "4"
     }
   ],
   "categories": [
