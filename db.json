@@ -30,10 +30,17 @@
     },
     {
       "id": 1664344664545,
-      "name": "r",
+      "name": "resim",
       "author": "de",
       "categoryId": "2",
       "isbn": "4"
+    },
+    {
+      "id": 1664367690629,
+      "name": "salı sabahı koçluğu",
+      "author": "martinez",
+      "categoryId": "2",
+      "isbn": "0909"
     }
   ],
   "categories": [
@@ -48,6 +55,18 @@
     {
       "id": "3",
       "name": "Deneme"
+    },
+    {
+      "id": 64397204256,
+      "name": "Eğitim"
+    },
+    {
+      "id": 64398138644,
+      "name": "dispact"
+    },
+    {
+      "id": 64398176129,
+      "name": "Eğitim"
     }
   ]
 }
