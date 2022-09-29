@@ -87,6 +87,7 @@ const editBook=()=>{
     }
 const updateBook={
     id: Number(params.bookId),
+    //id: params.bookId,
     name: bookname,
     author: author,
     categoryId: category,

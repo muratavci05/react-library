@@ -1,19 +1,42 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux"; //for subscribe 
+import React, { useEffect,useState } from "react";
+import { useSelector, useDispatch } from "react-redux"; //for subscribe 
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const ListCategories =()=>{
+const ListCategories =(props)=>{
+    const dispatch=useDispatch();
     const { categoriesState } = useSelector ((state)=> state);   //kategorileri çekmek için 
     console.log ("catState",categoriesState);
+    
+    const [catUpdate,setCatUpdate]=useState(false);
+    const navigate=useNavigate();
 
     useEffect(()=> {
         document.title = "Library - Kategoriler";
-    });
+    },[catUpdate]);
 
-    if(categoriesState.success !== true) {     // eğer kategori çekme işlemi esnasında bir durum olursa gecikme vs.. loading çalışsın
-        return <Loading />
-    };
+    const deleteCategory = (id) => {
+        console.log(`http://localhost:3004/categories/${id}`);
+        axios
+        .delete(`http://localhost:3004/categories/${id}`)
+        .then((res)=>{
+            console.log("delete res", res);
+            dispatch({type: "DELETE_CATEGORIES",payload:id})
+            navigate("/categories");
+            
+
+
+        })
+        };
+        
+        if(categoriesState.success !== true) {     // eğer kategori çekme işlemi esnasında bir durum olursa gecikme vs.. loading çalışsın
+            return <Loading />;
+    }
+
+    
+   
 
     return(
         <div className="container my-5">
@@ -22,6 +45,8 @@ const ListCategories =()=>{
     <div className="my-3 d-flex justify-content-end">  
         <Link to="/add-category" className="btn btn-primary">Kategori Ekle</Link>
     </div>
+
+    
 
 
 <table className="table">
@@ -47,13 +72,14 @@ const ListCategories =()=>{
                         
                         <td className="text-center">
                             <div className="btn-group" role="group" >
+
                             <button type="button" 
                             className="btn btn-outline-danger btn-sm" 
-                            onClick={()=>{
+                            onClick={()=>{deleteCategory(category.id)
                                /*  setShowModal(true);  //modal kuralı.."buradaki modal'ı göster"
                                 setBookToBeDelete(book.id) // hangi kitabı silecek, id si belli olan
-                                //deleteBook(book.id)
-                                setDeleteBookName(book.name); //modal da silinecek kitap ismi çıkması için */
+                                //deleteBook(category.id)
+                                setDeleteBookName(category.name); //modal da silinecek kitap ismi çıkması için */
                             }}>
                         Delete</button>
 
@@ -67,21 +93,7 @@ const ListCategories =()=>{
                 );
             })}
   </tbody>
-</table>{/* 
-
-{
-     showModal === true && (
-    
-    <Modal 
-    //aciklama={`${deleteBookName} "- Are you sure you want to delete?"`} 
-    aciklama="Are you sure you want to delete?"
-    title={deleteBookName}
-    //title={"Deletion Process"}
-    onConfirm={()=>deleteBook(bookToBeDelete)} 
-    onCancel= {()=> setShowModal(false)}/>  // generic bir modal..istenilen yerde kullanılabilir
-)}
-
- */}
+</table>
 </div>
 
     );

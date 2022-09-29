@@ -45,7 +45,20 @@ const categoriesReducer = (state = initialState,action) =>{
                 ...state,
                 categories:[...state.categories, action.payload]
 
-            }
+            };
+
+        case "DELETE_CATEGORIES":
+            
+                
+                const filteredCategories = state.categories.filter((item)=>item.id !== action.payload)
+
+                return{
+                    ...state,
+                    categories: filteredCategories
+            
+            };
+
+        
             
 
         default:

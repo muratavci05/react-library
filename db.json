@@ -1,61 +1,76 @@
 {
   "books": [
     {
-      "id": 2,
-      "name": "kitap 1",
-      "author": "yazar 2",
-      "categoryId": "2",
-      "isbn": "1111111111112"
+      "id": 1664477452266,
+      "name": "Han Duvarları",
+      "author": "Fazıl Hüsnü Dağlarca",
+      "isbn": "11111111111110",
+      "categoryId": "64477422929"
     },
     {
-      "id": 1663784298113,
-      "name": "hayvanlar alemi",
-      "author": "yabancı kitap",
-      "categoryId": "2",
-      "isbn": "090"
+      "id": 1664477482073,
+      "name": "Davam",
+      "author": "Adolf Hitler",
+      "isbn": "11111111111111",
+      "categoryId": "64477338034"
     },
     {
-      "id": 1664282086690,
-      "name": "yeni kitap",
-      "author": "yazarım",
-      "categoryId": "1",
-      "isbn": "0000"
+      "id": 1664477498226,
+      "name": "Sefiller",
+      "author": "Viktor Hugo",
+      "isbn": "11111111111112",
+      "categoryId": "64477356062"
     },
     {
-      "id": 1664282263204,
-      "name": "yeni kitap",
-      "author": "autro",
-      "categoryId": "1",
-      "isbn": "9999999"
+      "id": 1664477564954,
+      "name": "Salı Sabahı Koçluğu",
+      "author": "David Cottrel",
+      "isbn": "11111111111113",
+      "categoryId": "64477328692"
     },
     {
-      "id": 1664344664545,
-      "name": "resim",
-      "author": "de",
-      "categoryId": "2",
-      "isbn": "4"
+      "id": 1664477597704,
+      "name": "Medya Analiz",
+      "author": "Anonim",
+      "isbn": "11111111111114",
+      "categoryId": "64477338034"
     },
     {
-      "id": 1664367690629,
-      "name": "salı sabahı koçluğu",
-      "author": "martinez",
-      "categoryId": "2",
-      "isbn": "0909"
+      "id": 1664477758310,
+      "name": "Pal Sokağı Çocukları 1",
+      "author": "Ferenc MOLNAR",
+      "categoryId": "64477321083",
+      "isbn": "11111111111115"
     }
   ],
   "categories": [
     {
-      "id": "1",
+      "id": 64477321083,
       "name": "Roman"
     },
     {
-      "id": "2",
+      "id": 64477328692,
+      "name": "Eğitim"
+    },
+    {
+      "id": 64477338034,
+      "name": "Deneme"
+    },
+    {
+      "id": 64477356062,
       "name": "Hikaye"
     },
     {
-      "id": "3",
-      "name": "Deneme"
+      "id": 64477361893,
+      "name": "Yazılım"
+    },
+    {
+      "id": 64477422929,
+      "name": "Şiir"
+    },
+    {
+      "id": 64477934700,
+      "name": "Dini "
     }
-    
   ]
 }

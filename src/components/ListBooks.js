@@ -96,7 +96,7 @@ const ListBooks=(props)=>{
         {booksState.books.map((book) => {
            const category = categoriesState.categories.find(
             (cat) =>
-           cat.id === book.categoryId);
+           cat.id == book.categoryId);   //1 adet eşittir ifadesini kaldırdım. kategori ve kitap id'ler string,number olarak uyuşmazlık yapmasın diye(aynı değer zaten)
            
                 return(
                     <tr key={book.id}>
