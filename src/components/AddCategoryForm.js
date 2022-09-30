@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
-import CategoriesList from "../pages/CategoriesList";
 import { useDispatch } from "react-redux";
 
 
@@ -46,17 +45,23 @@ const AddCategoryForm = (props)=>{
             console.log("New Categories res", res);
             dispatch({type: "ADD_CATEGORIES",payload: newCategory})
             setCategoryName("");
+           
             navigate("/categories");
+
 
     })
         .catch((err)=>console.log(err))
     
     };
 
+    
+
     if (categoryName === setCategoryName.res){
         alert ("Bu Kategori Tanımlanmış, Tekrar Oluşturulamaz");
         return;
     }
+
+    
 
     return(
         <div className="container my-5">

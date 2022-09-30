@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loading from "../components/Loading";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const EditCategory = (props)=>{
@@ -13,15 +13,31 @@ const EditCategory = (props)=>{
     const params=useParams();
     const navigate=useNavigate();
     const dispatch=useDispatch();
+    const {categoriesState} = useSelector ((state)=>state);
+    console.log(categoriesState);  
+
+
     useEffect(()=>{
-        axios
+         console.log(categoriesState.categories, params.categoryId);
+        const searchCategory = categoriesState.categories.find(
+            (item) => item.id == params.categoryId);
+           if (searchCategory === undefined){
+                navigate("/categories");
+                return;
+            }
+            console.log(searchCategory);
+            setCategoryName(searchCategory.name);
+
+        /* axios
              .get(`http://localhost:3004/categories/${params.categoryId}`)
              .then((res)=>{
                 console.log("params", res.data);
                 setCategoryName(res.data.name)
              })
-             .catch((err) => console.log(err));
+             .catch((err) => console.log(err)); */
     },[]);
+
+
 
     const categorySubmit=(event)=>{
        event.preventDefault();
@@ -48,7 +64,7 @@ const EditCategory = (props)=>{
             .catch((err) => console.log("Category Edit Error", err));
     };
 
-    if (categoryName === null){
+    if (categoriesState === null){
         return <Loading />;
     }
 

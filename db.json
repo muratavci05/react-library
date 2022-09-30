@@ -1,13 +1,6 @@
 {
   "books": [
     {
-      "id": 1664477452266,
-      "name": "Han Duvarları",
-      "author": "Fazıl Hüsnü Dağlarca",
-      "isbn": "11111111111110",
-      "categoryId": "64477422929"
-    },
-    {
       "id": 1664477482073,
       "name": "Davam",
       "author": "Adolf Hitler",
@@ -36,11 +29,11 @@
       "isbn": "11111111111115"
     },
     {
-      "id": 1664529710574,
-      "name": "dark",
-      "author": "fdf",
-      "categoryId": "64477328692",
-      "isbn": "53"
+      "id": 1664534666206,
+      "name": "Han Duvarları",
+      "author": "Fazıl Hüsnü Dağlarca",
+      "isbn": "11111111111114",
+      "categoryId": "64534633982"
     }
   ],
   "categories": [
@@ -65,8 +58,8 @@
       "name": "Yazılım"
     },
     {
-      "id": 64477422929,
-      "name": "Şiirlerim"
+      "id": 64534633982,
+      "name": "Şiirler"
     }
   ]
 }
