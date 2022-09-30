@@ -1,6 +1,12 @@
+*Making a library project with React + React Route + Redux
+* Add, delete, update books
+* Adding, deleting, updating categories
+![react library project](https://github.com/muratavci05/react-library/blob/5a26aab9e7c6e2e08ff8bb1cae503e319819fbb1/src/components/assents/library.gif)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
