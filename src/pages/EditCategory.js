@@ -35,6 +35,8 @@ const EditCategory = (props)=>{
                 setCategoryName(res.data.name)
              })
              .catch((err) => console.log(err)); */
+
+             document.title = `Library - Edit Category - ${searchCategory.name}`;
     },[]);
 
 
