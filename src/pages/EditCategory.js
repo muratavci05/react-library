@@ -1,0 +1,84 @@
+import React,{useEffect,useState} from "react";
+import Header from "../components/Header";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Loading from "../components/Loading";
+import { useDispatch } from "react-redux";
+
+
+const EditCategory = (props)=>{
+
+    const [categoryName,setCategoryName]=useState("");
+
+    const params=useParams();
+    const navigate=useNavigate();
+    const dispatch=useDispatch();
+    useEffect(()=>{
+        axios
+             .get(`http://localhost:3004/categories/${params.categoryId}`)
+             .then((res)=>{
+                console.log("params", res.data);
+                setCategoryName(res.data.name)
+             })
+             .catch((err) => console.log(err));
+    },[]);
+
+    const categorySubmit=(event)=>{
+       event.preventDefault();
+
+       if(categoryName === ""){
+        alert ("Kategori Alanı Boş Olarak Güncellenemez !!!");
+        return;
+       }
+
+       const updateCategory={
+            id: Number(params.categoryId),
+            name:categoryName,
+       };
+       console.log("updateCategory", updateCategory);
+       axios
+            .put(`http://localhost:3004/categories/${params.categoryId}`,updateCategory)
+            .then((res)=>{
+                console.log(res.data);
+                
+                dispatch ({type: "EDIT_CATEGORIES", payload: updateCategory});
+                setCategoryName("");
+                navigate("/categories");
+            })
+            .catch((err) => console.log("Category Edit Error", err));
+    };
+
+    if (categoryName === null){
+        return <Loading />;
+    }
+
+    
+
+    return(
+        <div>
+            <Header/>
+            <div className="container my-5">
+            <form  onSubmit={categorySubmit} className="container my-2">
+            <div className="row">
+                <div className="col">
+                    <input 
+                    type="text" 
+                    className="form-control" 
+                    placeholder="Yeni Kategori Adı" 
+                    value={categoryName}
+                    onChange={(event)=>setCategoryName(event.target.value)}
+                    />
+                </div>     
+                </div>
+                    <div className="d-flex justify-content-center my-3">
+                         <button type="submit" className="btn btn-primary w-50 ">
+                            Güncelle</button>
+                    </div>
+               
+            </form>
+        </div>
+        </div>    
+    )
+};
+
+export default EditCategory;

@@ -62,7 +62,7 @@ const ListBooks=(props)=>{
 
     if (booksState.success !== true || categoriesState.success !== true) {
         return (
-            <div><Loading /></div>
+            <Loading />
         );
     }
 

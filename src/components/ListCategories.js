@@ -83,7 +83,7 @@ const ListCategories =(props)=>{
                             }}>
                         Delete</button>
 
-                        { <Link to={`edit-category/${category.id}`} 
+                        { <Link to={`/edit-category/${category.id}`} 
                         className="btn btn-sm btn-outline-secondary">
                             Edit</Link>
                              }

@@ -29,18 +29,18 @@
       "categoryId": "64477328692"
     },
     {
-      "id": 1664477597704,
-      "name": "Medya Analiz",
-      "author": "Anonim",
-      "isbn": "11111111111114",
-      "categoryId": "64477338034"
-    },
-    {
       "id": 1664477758310,
-      "name": "Pal Sokağı Çocukları 1",
+      "name": "Pal Sokağı Çocukları",
       "author": "Ferenc MOLNAR",
       "categoryId": "64477321083",
       "isbn": "11111111111115"
+    },
+    {
+      "id": 1664529710574,
+      "name": "dark",
+      "author": "fdf",
+      "categoryId": "64477328692",
+      "isbn": "53"
     }
   ],
   "categories": [
@@ -66,11 +66,7 @@
     },
     {
       "id": 64477422929,
-      "name": "Şiir"
-    },
-    {
-      "id": 64477934700,
-      "name": "Dini "
+      "name": "Şiirlerim"
     }
   ]
 }

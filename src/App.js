@@ -11,6 +11,7 @@ import AddBookForm from "./components/AddBookForm";
 import EditBook from "./pages/EditBook";
 import CategoriesList from "./pages/CategoriesList";
 import AddCategory from "./pages/AddCategory";
+import EditCategory from "./pages/EditCategory";
 
 import {useDispatch} from "react-redux";   // 1.aşama react-redux fonksiyonu import ediyoruz 
 import axios from "axios";
@@ -75,6 +76,7 @@ return(
           <Route path="/AddBookform" element={<AddBookForm />} />
           <Route path="/categories" element={<CategoriesList />} />
           <Route path="/add-category" element={<AddCategory />} />
+          <Route path="/edit-category/:categoryId" element={<EditCategory />} />
       </Routes>
   </BrowserRouter>
   );
