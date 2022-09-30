@@ -18,7 +18,7 @@ const EditCategory = (props)=>{
 
 
     useEffect(()=>{
-         console.log(categoriesState.categories, params.categoryId);
+         console.log(categoriesState.categories,params.categoryId);
         const searchCategory = categoriesState.categories.find(
             (item) => item.id == params.categoryId);
            if (searchCategory === undefined){
