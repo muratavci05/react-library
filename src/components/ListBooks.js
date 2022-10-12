@@ -26,6 +26,8 @@ const ListBooks=(props)=>{
     const [searchText,setSearchText]=useState("")
 
     useEffect(()=>{
+
+        // search
         const filtered = booksState.books.filter((item) => item.name.toLowerCase().includes(searchText));
         setFilteredBooks(filtered);
 
@@ -48,14 +50,14 @@ const ListBooks=(props)=>{
         })
         .catch((err)=> console.log("books err", err));
  */
-    },[searchText,booksState]);
+    },[searchText,booksState]);    //search kısmınd agüncelleme olması için...booksState yazılmaz ise ekran yüklenmiyoyr
 
     const deleteBook=(id)=>{
         console.log(`http://localhost:3004/books/${id}`);
         axios
         .delete(`http://localhost:3004/books/${id}`)
         .then((res) => {
-            console.log("delete res", res);
+            console.log("delete res", res);                     
             dispatch({ type: "DELETE_BOOK",payload:id});
             setDidUpdate(!didUpdate);
             setShowModal(false);

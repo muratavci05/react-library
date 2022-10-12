@@ -15,7 +15,7 @@ const AddCategoryForm = (props)=>{
 
     
     
-                                //categoryId için benzersiz id tanımlaması yapıldı
+                               //categoryId için benzersiz id tanımlaması yapıldı
 
     const categoryId=new Date().getTime();
     //const categoryId2=new Date().getTime();
