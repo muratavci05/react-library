@@ -22,7 +22,7 @@ const ListCategories =(props)=>{
 
     useEffect(()=> {
         document.title = "Library - Kategoriler";
-    },[catUpdate]); 
+    },[catUpdate]);
 
  
     const deleteCategory = (id) => {
