@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
@@ -10,6 +10,9 @@ const AddCategoryForm = (props)=>{
     const dispatch=useDispatch();
     const navigate = useNavigate();
     const [categoryName,setCategoryName]=useState("");
+    const { categoriesState} = useSelector ((state) => state);
+    console.log("Categories State", categoriesState);
+
     
     
                                 //categoryId için benzersiz id tanımlaması yapıldı
@@ -22,13 +25,7 @@ const AddCategoryForm = (props)=>{
     //console.log("new category", categoryName)
 
 
-                                //newCategory ile category id ve name yapısını oluşturdum
-    const newCategory ={
-    //id:categoryId1+categoryId2,
-    id: categoryId-1600000000000,
-    name: categoryName,
-    };
-    console.log(newCategory);
+                                
 
                                 //kategori kısmına boş kaydet denildğinde uyarı  vermesi için
     if (categoryName === ""){
@@ -36,6 +33,25 @@ const AddCategoryForm = (props)=>{
         return ;
     };
 
+    const hasCategory = categoriesState.categories.find(
+        (item) => item.name.toLowerCase() === categoryName.toLowerCase());
+    console.log(hasCategory);
+
+    if(hasCategory !== undefined){
+        alert("Böyle Bir *** Kategori İsmi *** Tanımlanmış");
+        setCategoryName("");
+
+        return;
+    }
+
+    
+    //newCategory ile category id ve name yapısını oluşturdum
+    const newCategory ={
+        //id:categoryId1+categoryId2,
+        id: categoryId-1600000000000,
+        name: categoryName[0].toUpperCase()+categoryName.substring(1),
+        };
+        console.log(newCategory);
 
                                 // Yeni kategorinin veri tabanına (db.json) gönderilmesi (post edilmesi)
 
@@ -52,16 +68,7 @@ const AddCategoryForm = (props)=>{
     })
         .catch((err)=>console.log(err))
     
-    };
-
-    
-
-    if (categoryName === setCategoryName.res){
-        alert ("Bu Kategori Tanımlanmış, Tekrar Oluşturulamaz");
-        return;
-    }
-
-    
+    };    
 
     return(
         <div className="container my-5">

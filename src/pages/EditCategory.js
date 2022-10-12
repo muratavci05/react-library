@@ -44,14 +44,27 @@ const EditCategory = (props)=>{
     const categorySubmit=(event)=>{
        event.preventDefault();
 
+       
        if(categoryName === ""){
         alert ("Kategori Alanı Boş Olarak Güncellenemez !!!");
         return;
        }
+       //var olan kategori isminde bir güncelleme yapılamaz >>
+       const hasCategory = categoriesState.categories.find(
+        (item) => item.name.toLowerCase() === categoryName.toLowerCase());
+         console.log(hasCategory);
+
+        if(hasCategory !== undefined){
+        alert("Böyle Bir *** Kategori İsmi *** Tanımlanmış");
+        setCategoryName("");
+
+        return;
+         }
+         //<<<
 
        const updateCategory={
             id: Number(params.categoryId),
-            name:categoryName,
+            name:categoryName[0].toUpperCase()+categoryName.substring(1),   // ilk harfi büyük yazılması için 
        };
        console.log("updateCategory", updateCategory);
        axios

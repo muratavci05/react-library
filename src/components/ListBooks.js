@@ -14,17 +14,21 @@ const ListBooks=(props)=>{
 
     
     const {categoriesState,booksState}= useSelector((state)=> state);  //useSelector ile kategorilerin güncel hali kullanılır (subscribe işlemi)
-    console.log (categoriesState);
-    console.log (booksState)
+    console.log ("categoriesState", categoriesState);
+    console.log ("booksState", booksState)
 
-    //const [books,setBooks]=useState(null);
+    const [filteredbooks,setFilteredBooks]=useState(null);
     //const [categories,setCategories]=useState(null);
     const [didUpdate,setDidUpdate] = useState(false);
     const [showModal,setShowModal] = useState(false);  //başlangıç olarak modal gözükmesin diye 
     const [bookToBeDelete,setBookToBeDelete]=useState(null);  //silinecek kitabı tutan state
     const [deleteBookName,setDeleteBookName]=useState("");
+    const [searchText,setSearchText]=useState("")
 
     useEffect(()=>{
+        const filtered = booksState.books.filter((item) => item.name.toLowerCase().includes(searchText));
+        setFilteredBooks(filtered);
+
 /*        axios
         .get("http://localhost:3004/books")
         .then((resBook) => {
@@ -44,7 +48,7 @@ const ListBooks=(props)=>{
         })
         .catch((err)=> console.log("books err", err));
  */
-    },[didUpdate]);
+    },[searchText,booksState]);
 
     const deleteBook=(id)=>{
         console.log(`http://localhost:3004/books/${id}`);
@@ -60,7 +64,7 @@ const ListBooks=(props)=>{
     };
 
 
-    if (booksState.success !== true || categoriesState.success !== true) {
+    if (booksState.success !== true || categoriesState.success !== true || filteredbooks === null) {
         return (
             <Loading />
         );
@@ -71,7 +75,16 @@ const ListBooks=(props)=>{
 <div className="container my-5">
    
     
-    <div className="my-3 d-flex justify-content-end">  
+    <div className="my-3 d-flex justify-content-between">  
+    <div className="w-50">
+                    <input 
+                    type="text" 
+                    className="form-control" 
+                    placeholder="search book name" 
+                    value={searchText}
+                    onChange={(event) => setSearchText(event.target.value)}
+                    />
+                </div>      
         <Link to="/add-book" className="btn btn-primary">Kitap Ekle</Link>
     </div>
 
@@ -93,7 +106,7 @@ const ListBooks=(props)=>{
   
   <tbody>
         
-        {booksState.books.map((book) => {
+        {filteredbooks.map((book) => {
            const category = categoriesState.categories.find(
             (cat) =>
            cat.id == book.categoryId);   //1 adet eşittir ifadesini kaldırdım. kategori ve kitap id'ler string,number olarak uyuşmazlık yapmasın diye(aynı değer zaten)

@@ -29,11 +29,11 @@
       "isbn": "11111111111115"
     },
     {
-      "id": 1664534666206,
+      "id": 1665570936423,
       "name": "Han Duvarları",
       "author": "Fazıl Hüsnü Dağlarca",
-      "isbn": "11111111111114",
-      "categoryId": "64534633982"
+      "categoryId": "65569230500",
+      "isbn": "32324355345"
     }
   ],
   "categories": [
@@ -58,8 +58,8 @@
       "name": "Yazılım"
     },
     {
-      "id": 64534633982,
-      "name": "Şiirler"
+      "id": 65569230500,
+      "name": "Şiir"
     }
   ]
 }

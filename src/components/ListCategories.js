@@ -4,31 +4,45 @@ import Loading from "./Loading";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Modal from "./Modal";
+
 
 const ListCategories =(props)=>{
     const dispatch=useDispatch();
-    const { categoriesState } = useSelector ((state)=> state);   //kategorileri çekmek için 
+    const { categoriesState, booksState } = useSelector ((state)=> state);   //kategorileri çekmek için 
     console.log ("catState",categoriesState);
+    console.log ("booksState", booksState);
     
     const [catUpdate,setCatUpdate]=useState(false);
     const navigate=useNavigate();
+
+    const [showDeleteModal,setShowDeleteModal] = useState (false);
+    const [delCategory,setDelCategory]=useState(null);
+    const [delCategoryName,setDelCategoryName]=useState("");
 
     useEffect(()=> {
         document.title = "Library - Kategoriler";
     },[catUpdate]);
 
+ 
     const deleteCategory = (id) => {
         console.log(`http://localhost:3004/categories/${id}`);
         axios
         .delete(`http://localhost:3004/categories/${id}`)
         .then((res)=>{
-            console.log("delete res", res);
+            console.log("delete res", res.data);
             dispatch({type: "DELETE_CATEGORIES",payload:id})
+            const booksHasCategory = booksState.books.filter(
+                (item) => item.categoryId == id  );
+                console.log("booksHasCategory", booksHasCategory)
+                booksHasCategory.map((item)=>dispatch({type:"DELETE_BOOK",payload:item.id}));
+          
             navigate("/categories");
             
 
 
         })
+        .catch((err)=>console.log("deleteCategoryErr", err));
         };
         
         if(categoriesState.success !== true) {     // eğer kategori çekme işlemi esnasında bir durum olursa gecikme vs.. loading çalışsın
@@ -75,11 +89,11 @@ const ListCategories =(props)=>{
 
                             <button type="button" 
                             className="btn btn-outline-danger btn-sm" 
-                            onClick={()=>{deleteCategory(category.id)
-                               /*  setShowModal(true);  //modal kuralı.."buradaki modal'ı göster"
-                                setBookToBeDelete(book.id) // hangi kitabı silecek, id si belli olan
-                                //deleteBook(category.id)
-                                setDeleteBookName(category.name); //modal da silinecek kitap ismi çıkması için */
+                            onClick={()=>{/* deleteCategory(category.id) */
+                               setShowDeleteModal(true);
+                               setDelCategory(category.id);
+                               setDelCategoryName(category.name);
+
                             }}>
                         Delete</button>
 
@@ -94,6 +108,14 @@ const ListCategories =(props)=>{
             })}
   </tbody>
 </table>
+{showDeleteModal === true && (
+<Modal
+            aciklama={`Are you sure you want to delete?`}
+            title={delCategoryName}
+            onConfirm={()=> deleteCategory (delCategory)}
+            onCancel={()=> setShowDeleteModal(false)}
+        />)}
+        
 </div>
 
     );
