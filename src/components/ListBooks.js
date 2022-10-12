@@ -27,7 +27,7 @@ const ListBooks=(props)=>{
 
     useEffect(()=>{
 
-        // search
+        // search kısmı için useeffect içine yazıldı..
         const filtered = booksState.books.filter((item) => item.name.toLowerCase().includes(searchText));
         setFilteredBooks(filtered);
 
