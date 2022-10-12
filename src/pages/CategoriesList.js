@@ -5,8 +5,6 @@ import ListCategories from "../components/ListCategories";
 
 const CategoriesList = ()=>{
     
-    
-
     return(
         <div>
             <Header />   
